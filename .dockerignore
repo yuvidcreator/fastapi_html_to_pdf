@@ -1,0 +1,10 @@
+README.md
+LICENSE
+.gitignore
+compose*.yaml
+
+**/.git
+.gitignore
+.idea/
+venv/
+**/__pycache__/

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: #333; }
+        .report-container { width: 80%; margin: auto; }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0px;
+            width: 100%; /* Cover the entire width */
+            height: 100%; /* Cover the entire height */
+            z-index: -1; /* Places the image behind the content */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <img src="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/page2_img.png" alt="Background Image" class="background-image">
+    <div class="report-container">
+        <h1>Report 1</h1>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+            {% for item in data %}
+            <tr>
+                <td>{{ item['name'] }}</td>
+                <td>{{ item['value'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

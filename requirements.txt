@@ -1,0 +1,18 @@
+fastapi
+uvicorn
+mysql
+PyMySQL
+aiomysql
+pydantic
+sqlalchemy
+python-dotenv
+cryptography
+pandas
+openpyxl
+python-multipart
+weasyprint
+jinja2
+aiofiles
+celery
+# celery[redis]
+redis
