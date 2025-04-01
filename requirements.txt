@@ -13,6 +13,7 @@ python-multipart
 weasyprint
 jinja2
 aiofiles
+schedule
 celery
 # celery[redis]
 redis

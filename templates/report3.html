@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+    <title>Pet's Code Plus</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        h1 { color: #333; }
-        .report-container { width: 80%; margin: auto; }
+        @page {
+            size: A4; /* Set page size to A4 */
+            margin: 0; /* Adjust margin to fit content */
+        }
         .background-image {
             position: absolute;
             top: 0;
@@ -16,24 +21,67 @@
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: cover;
         }
+        .content-container {
+            position: absolute;
+            top: 515px; /* Adjust this value to position content vertically */
+            left: 390px; /* Adjust this value to position content horizontally */
+            z-index: 1; /* Ensure content is above the background */
+            color: #000; /* Default text color */
+        }
+        .header {
+            color:gray; /* Header color */
+            font-size: 20px; /* Header font size */
+            font-weight: 500; /* Header font weight */
+            margin-bottom: 20px; /* Space below header */
+            margin-left: 75px;
+        }
+        .page-number {
+            font-family: 'NanumSquare', sans-serif;
+            position: absolute;
+            top: 43px;
+            left: 60%;
+            font-size: 13px;
+            color: #000; /* Page number color */
+            letter-spacing:1.5px;
+            font-weight: 600;
+            /* margin-left:129px; */
+        }
+        .footer {
+            color: #b0b0b0; /* Footer color */
+            font-size: 17px; /* Footer font size */
+            font-weight: 800; /* Footer font weight */
+            margin-top: 20px; /* Space above footer */
+        }
     </style>
 </head>
 <body>
+    
     <img src="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/page2_img.png" alt="Background Image" class="background-image">
-    <div class="report-container">
-        <h1>Report 1</h1>
-        <table border="1">
-            <tr>
-                <th>Name</th>
-                <th>Value</th>
-            </tr>
-            {% for item in data %}
-            <tr>
-                <td>{{ item['name'] }}</td>
-                <td>{{ item['value'] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="header">
+        <!-- <div class="page-number">02 page</div> -->
+  </div>
+  <div class="content-container">
+    <div style="font-size: 45px; font-family: 'NanumSquare'; font-weight: 800; margin-bottom: 40px;">CONTENTS</div>
+    
+    <div style="font-size: 29px; font-family: 'NanumSquare'; font-weight: 800; color: #ab2124;">혈통 분석 검사</div>
+    
+    <div style="font-size: 20px; font-family: 'NanumSquare'; font-weight: 400; margin-bottom: 40px;margin-left:40px;margin-top: 10px;">
+        <div style="margin-bottom:10px;">01. 유전자 혈통 분석 방법</div>
+        <div style="margin-bottom:10px;">02. 유전자 혈통 분석 결과</div>
+        <div style="margin-bottom:10px;">03. 내 견종은 어디서 왔을까?</div>
     </div>
+    
+    <div style="font-size: 29px; font-family: 'NanumSquare'; font-weight: 800; color: #ab2124;">유전 질환 검사</div>
+    <div style="font-size: 20px; font-family: 'NanumSquare'; font-weight: 400; margin-bottom: 40px;margin-left:40px;margin-top: 10px;">
+        <div style="margin-bottom:10px;">04. 유전 질환 검사 설명</div>
+        <div style="margin-bottom:10px;">05. 유전 질환 리스트</div>
+        <div style="margin-bottom:10px;">06. 발견된 유전 질환 변이</div>
+        <div style="margin-bottom:10px;">07. 견종별 취약한 질환</div>
+    </div>
+    
+    <div style="font-size: 29px; font-family: 'NanumSquare'; font-weight: 800; color: #ab2124;">셀바이오디엑스</div>
+    
+    <div style="font-size: 20px; font-family: 'NanumSquare'; font-weight: 400;margin-left:40px;margin-top: 10px;">08. 베스트 아이템</div>
+</div>
 </body>
 </html>

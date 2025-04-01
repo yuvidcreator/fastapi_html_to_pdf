@@ -4,7 +4,8 @@ import os
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML, CSS
-from worker import celery_app
+from app.helper.utils import print_file_size
+from app.worker import celery_app
 
 
 
@@ -75,6 +76,7 @@ def generate_pdf_task(self, file_path, output_filename):
 
     with open(output_filename, "wb") as f:
         f.write(final_pdf)
+        print_file_size(f)
 
     os.remove(file_path)
     return output_filename

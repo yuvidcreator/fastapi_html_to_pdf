@@ -1,5 +1,5 @@
 from sqlalchemy import Table, Column, Integer, String
-from database import metadata
+from app.database import metadata
 
 reports = Table(
     "reports",

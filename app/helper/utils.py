@@ -1,5 +1,7 @@
 import os
 from PIL import Image
+from typing import Annotated
+from fastapi import File
 
 
 
@@ -16,3 +18,8 @@ def print_file_size(file):
     File_Size = os.path.getsize(file)
     File_Size_MB = round(File_Size/1024/1024,2)
     print("Image File Size is " + str(File_Size_MB) + "MB" )
+
+
+
+async def create_file(file: Annotated[bytes, File()]):
+    return {"file_size": len(file)}
