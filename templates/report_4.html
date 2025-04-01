@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="http://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> -->
+    <link rel="stylesheet" href="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/CSS/nanumsquare.css">
+    <link rel="stylesheet" href="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/CSS/bootstrap.min.css">
+    <title>Pet's Code Plus</title>
+    <style>
+        @page {
+            size: A4; /* Set page size to A4 */
+            margin: 0mm; /* Adjust margin to fit content */
+        }
+        body { 
+            font-family: 'NanumSquare', sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .report-container { width: 80%; margin: auto; }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0px;
+            width: 100%; /* Cover the entire width */
+            height: 100%; /* Cover the entire height */
+            z-index: -1; /* Places the image behind the content */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover;
+        }
+        .header {
+            margin-left: 65px;
+            margin-top:-129%;
+            z-index: 1; 
+        }
+        .page-number {
+            font-family: 'NanumSquare', sans-serif;
+            position: absolute;
+            top: 43px;
+            left: 60%;
+            font-size: 13px;
+            color: #000; /* Page number color */
+            letter-spacing:1.5px;
+            font-weight: 600;
+            /* margin-left:129px; */
+        }
+        .header hr {
+            margin: 0 auto; /* Centers the <hr> */
+            height: 10px;
+            background-color: #b51e23; /* Line color */
+            border: none; /* Removes default border */
+            width: 10%; /* Line width */
+            z-index: 1;
+            position: relative; /* Ensures it's within flow */
+            margin-left: 5px;
+        }
+        .header h1 {
+            font-size: 59px; /* Adjusted to fit content */
+            font-family: 'NanumSquare', sans-serif;
+            font-weight: 800;
+            color: #b51e23;
+            margin-top: 30px;
+            letter-spacing: 0px;
+            z-index: 1;
+        }
+        .header h2 {
+            font-size: 35px; /* Adjusted to fit content */
+            font-family: 'NanumSquare', sans-serif;
+            font-weight: 800;
+            color: #000;
+            margin-top:-30px;
+            letter-spacing: 0px;
+            margin-bottom: 6px;
+            z-index: 1;
+        }
+        .sub-header {
+            width:415px;
+            font-size: 16px;
+            font-family: 'NanumSquare', sans-serif;
+            font-weight: 100;
+            color: #000;
+            padding-left: 15px;
+            letter-spacing: 30px; /* Adjusted spacing */
+            display: inline-block;
+            background-color: #d9d9d9;
+            letter-spacing: 2.5em;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            z-index: 1;
+        }
+        .table-section {
+            margin-left: 50px; /* Adjusted for better fit */
+            margin-top: 580px; /* Adjust spacing as needed */
+            z-index: 1;
+        }
+        .table-section hr {
+            height: 4px;
+            background-color: #b51e23; /* Sets the fill color */
+            border: none; /* Removes the default border */
+            width: 43%; /* Adjusted to fit page */
+            margin-left: 20px;
+            z-index: 1;
+        }
+        table{
+            width: 45%;
+            margin-left: 30px;
+            z-index: 1;
+        }
+        td {
+            font-size: 19px; /* Adjust font size */
+            font-family: 'NanumSquare', sans-serif;
+            font-weight: 400;
+            color: #000;
+            padding: 4px 0px 4px 0px;
+            z-index: 1;
+        }
+        .label {
+            font-size: 19px;
+            font-family: 'NanumSquare', sans-serif;
+            font-weight: 800;
+            color: #000;
+            z-index: 1;
+        }
+        .hr1 {
+            margin: 0 auto; /* Centers the <hr> */
+            height: 6px;
+            background-color: #b51e23; /* Line color */
+            border: none; /* Removes default border */
+            width: 50%; /* Line width */
+            z-index: 1;
+            position: relative; /* Ensures it's within flow */
+            margin-left: 20px;
+        }
+        .hr2 {
+            margin: 0 auto; /* Centers the <hr> */
+            height: 6px;
+            background-color: #b51e23; /* Line color */
+            border: none; /* Removes default border */
+            width: 50%; /* Line width */
+            z-index: 1;
+            position: relative; /* Ensures it's within flow */
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <img src="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/page3_img.png" alt="Background Image" class="background-image">
+    <div class="container">
+        <div class="header" style="z-index:1;">
+            <!-- <div class="page-number">07 page</div> -->
+            <p style="margin-left:55px;letter-spacing:-0.5px;">CellBioDX Pet’s Code Plus</p>
+            <!-- <div class="subheader"><span style="font-size:41px;font-family:NanumSquare;letter-spacing:-1.2px;font-weight:800;">04</span> 유전 질환 검사 설명</div> -->
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-section" >
+            <div class="hr1"></div>
+            <table border="1">
+                <tr class="label">
+                    <th>Category</th>
+                    <th>Value</th>
+                </tr>
+                {% for item in data %}
+                <tr>
+                    <td class="td">{{ item['category'] }}</td>
+                    <td class="td">{{ item['value'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="hr2"></div>
+        </div>
+        
+    </div>
+</body>
+</html>

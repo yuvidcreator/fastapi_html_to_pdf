@@ -2,7 +2,7 @@ import os
 from PIL import Image
 from typing import Annotated
 from fastapi import File
-
+# from PyPDF2 import PdfReader, PdfWriter
 
 
 def compress_image_pillow(input_path, output_path, quality=85):
@@ -12,6 +12,21 @@ def compress_image_pillow(input_path, output_path, quality=85):
         img.save(output_path, "PNG", optimize=True) # For PNG Images
     return img
 
+
+# def compress_pdf(input_path):
+#     output_path = "/compressed_pdfs"
+#     '''# Compress PDF Using - PyPDF'''
+#     reader = PdfReader(input_path)
+#     writer = PdfWriter()
+
+#     for page in reader.pages:
+#         page.compress_content_streams()  # This is CPU intensive!
+#         writer.add_page(page)
+
+#     with open(output_path, "wb") as f:
+#         writer.write(f)
+    
+#     return output_path
 
 
 def print_file_size(file):

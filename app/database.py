@@ -1,6 +1,18 @@
-# from databases import Database
-from sqlalchemy import create_engine, MetaData
+import os
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the environment variable
+environment = os.getenv("ENVIRONMENT")
+
+# Define the database URL based on the environment
+SQLALCHEMY_DATABASE_URL = os.getenv(f"DATABASE_URL_{environment.upper()}")
+port = int(os.getenv(f"PORT_{environment.upper()}"))
 
 
 # Desired maximum connections
@@ -11,11 +23,10 @@ pool_size = 10  # You can adjust this as needed
 max_overflow = max_connections - pool_size
 Base = declarative_base()
 
-DATABASE_URL = "mysql+pymysql://root:@localhost:3306/testing_pdf_db"
 
 # Create Engine for MySQL
 engine = create_engine(
-    DATABASE_URL,
+    SQLALCHEMY_DATABASE_URL,
     pool_size=pool_size, 
     max_overflow=max_overflow,
     pool_timeout=30,
@@ -28,4 +39,4 @@ engine = create_engine(
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-metadata = MetaData()
+

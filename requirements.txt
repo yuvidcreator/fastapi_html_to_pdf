@@ -11,6 +11,7 @@ pandas
 openpyxl
 python-multipart
 weasyprint
+pypdf
 jinja2
 aiofiles
 schedule

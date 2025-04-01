@@ -3,37 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+    <!-- <link rel="stylesheet" href="http://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> -->
+    <link rel="stylesheet" href="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/CSS/nanumsquare.css">
+    <link rel="stylesheet" href="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/CSS/bootstrap.min.css">
     <title>Pet's Code Plus</title>
     <style>
         @page {
             size: A4; /* Set page size to A4 */
-            margin: 0mm; /* Adjust margin to fit content */
+            margin:0mm; /* Adjust margin to fit content */
         }
-        body { 
+        .container {
             font-family: 'NanumSquare', sans-serif;
-            margin: 0;
-            padding: 0;
-            position: relative;
-            width: 100%;
-            height: 100%;
-         }
-        .report-container { width: 80%; margin: auto; }
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0px;
-            width: 100%; /* Cover the entire width */
-            height: 100%; /* Cover the entire height */
-            z-index: -1; /* Places the image behind the content */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            background-size: cover;
+            width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height */
+            position: relative; /* For absolute positioning of elements */
+            padding:0px 60px; /* Adjust padding as needed */
+            box-sizing: border-box; /* Include padding in width/height */
         }
         .header {
-            margin-left: 65px;
-            margin-top:-129%;
-            z-index: 1; 
+            font-family: 'NanumSquare', sans-serif;
+            color:#afafaf; /* Header color */
+            font-size: 17px; /* Header font size */
+            font-weight: 800; /* Header font weight */
+            margin-bottom: 20px; /* Space below header */
+            margin-left:0px;
+            letter-spacing:0px;
+            padding-top:43px;
         }
         .page-number {
             font-family: 'NanumSquare', sans-serif;
@@ -46,134 +41,284 @@
             font-weight: 600;
             /* margin-left:129px; */
         }
-        .header hr {
-            margin: 0 auto; /* Centers the <hr> */
-            height: 10px;
-            background-color: #b51e23; /* Line color */
-            border: none; /* Removes default border */
-            width: 10%; /* Line width */
-            z-index: 1;
-            position: relative; /* Ensures it's within flow */
-            margin-left: 5px;
-        }
-        .header h1 {
-            font-size: 59px; /* Adjusted to fit content */
+        .subheader {
             font-family: 'NanumSquare', sans-serif;
-            font-weight: 800;
-            color: #b51e23;
-            margin-top: 30px;
-            letter-spacing: 0px;
-            z-index: 1;
-        }
-        .header h2 {
-            font-size: 35px; /* Adjusted to fit content */
-            font-family: 'NanumSquare', sans-serif;
-            font-weight: 800;
-            color: #000;
+            color:#b51e23; /* Subheader color */
+            font-size: 30px; /* Subheader font size */
+            font-weight: 800; /* Subheader font weight */
+            margin-bottom: 10px; /* Space below subheader */
+            letter-spacing:-0.5px;
+            margin-left:0px;
             margin-top:-30px;
-            letter-spacing: 0px;
-            margin-bottom: 6px;
-            z-index: 1;
         }
-        .sub-header {
-            width:415px;
-            font-size: 16px;
-            font-family: 'NanumSquare', sans-serif;
-            font-weight: 100;
-            color: #000;
-            padding-left: 15px;
-            letter-spacing: 30px; /* Adjusted spacing */
-            display: inline-block;
-            background-color: #d9d9d9;
-            letter-spacing: 2.5em;
-            padding-top: 3px;
-            padding-bottom: 3px;
-            z-index: 1;
+        .text {
+            font-size: 17px; /* Text font size */
+            font-weight: 300; /* Text font weight */
+            line-height: 1.5; /* Line height for readability */
         }
-        .table-section {
-            margin-left: 50px; /* Adjusted for better fit */
-            margin-top: 580px; /* Adjust spacing as needed */
-            z-index: 1;
+        .footer {
+            color: #b0b0b0; /* Footer color */
+            font-size: 17px; /* Footer font size */
+            font-weight: 800; /* Footer font weight */
+            margin-top: 20px; /* Space above footer */
         }
-        .table-section hr {
-            height: 4px;
-            background-color: #b51e23; /* Sets the fill color */
-            border: none; /* Removes the default border */
-            width: 43%; /* Adjusted to fit page */
-            margin-left: 20px;
-            z-index: 1;
-        }
-        table{
-            width: 45%;
-            margin-left: 30px;
-            z-index: 1;
-        }
-        td {
-            font-size: 19px; /* Adjust font size */
-            font-family: 'NanumSquare', sans-serif;
-            font-weight: 400;
-            color: #000;
-            padding: 4px 0px 4px 0px;
-            z-index: 1;
-        }
-        .label {
-            font-size: 19px;
-            font-family: 'NanumSquare', sans-serif;
-            font-weight: 800;
-            color: #000;
-            z-index: 1;
-        }
-        .hr1 {
-            margin: 0 auto; /* Centers the <hr> */
-            height: 6px;
-            background-color: #b51e23; /* Line color */
-            border: none; /* Removes default border */
-            width: 50%; /* Line width */
-            z-index: 1;
-            position: relative; /* Ensures it's within flow */
-            margin-left: 20px;
-        }
-        .hr2 {
-            margin: 0 auto; /* Centers the <hr> */
-            height: 6px;
-            background-color: #b51e23; /* Line color */
-            border: none; /* Removes default border */
-            width: 50%; /* Line width */
-            z-index: 1;
-            position: relative; /* Ensures it's within flow */
-            margin-left: 20px;
-        }
+        
     </style>
 </head>
 <body>
     <img src="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/page2_img.png" alt="Background Image" class="background-image">
-    <div class="report-container">
-        <div class="header" style="border-top: 3px solid #b51e23;z-index: 1;">
-            <!-- <div class="page-number">01 page</div> -->
-            <hr>
-            <h1>Pet’s Code Plus</h1>
-            <h2>혈통분석 + 유전질환검사</h2>
-            <div class="sub-header">CELLBIODX
+    <!-- <div class="report-container"> -->
+        <div class="container">
     
+            <div class="header" style="z-index:1;">
+                <!-- <div class="page-number">11 page</div> -->
+                <p style="margin-left:55px;letter-spacing:-0.5px;">CellBioDX Pet’s Code Plus</p>
+                <div class="subheader"><span style="font-size:41px;font-family:NanumSquare;letter-spacing:-1.2px;font-weight:800;">03</span> 견종별 취약한 질환 (ㅁ ~ ㅂ)</div>
             </div>
+    
+    
+             <!-- section 1  -->
+        <div style="margin-top:0px;width:77%;">
+            <div style="border-bottom:3px solid #b51e23;margin:0px;padding:0px;">
+              <p style="background-color: #b51e23;width:3.8%;color: #fff;text-align: center;font-family:NanumSquare;font-weight:800;margin:0px;padding:0px;font-size:15px;">ㅁ</p>
+            </div>
+      
+            <div>
+              <!-- row 1 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">마스티프</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">위팽만과 회전증, 이형성관절염, 박리성 골연골염, 유산구성 골염증, 안검내반증, 진행성 망막 위축증, 제3
+                    안검샘 탈출증, 아토피, 확장성 심근병증, 동맥관 개원증, 갑상선 기능저하증</p>
+                </div>
+      
+              </div>
+              <!-- row 2 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">말티즈</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">슬개골탈구, 염증성 장질환, 백내장, 녹내장, 이중모화증, 동맥관 개원증, 심장판막 질환, 갑상선 기능저하증,
+                    간문맥 전신단락증, 혈관성 혈우병, 용혈성 빈혈과 혈소판 감소 증후근, 상물림(하물림), 이상교합</p>
+                </div>
+      
+              </div>
+              <!-- row 3 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">미니어처 슈나우저</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">간질, 아토피, 동맥관 개원증, 심장판막 질환, 부신과다기능증, 당뇨병, 혈관성 혈우병
+                    간문맥 전신단락증, 용혈성 빈혈과 혈소판 감소 증후근, 방광 혹은 신장결석, 사구체신염</p>
+                </div>
+      
+              </div>
+              <!-- row 4 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">미니어처 핀셔</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">비만세포 종양, 슬개골탈구, 골관절 질환, 척추간판 질환, 백내장, 녹내장, 각막 이형성증, 청각상실, 간질,
+                    심장판막 질환, 갑상선 기능저하증, 당뇨병, 간문맥 전신단락증, 용혈성 빈혈과 혈소판 감소 증후근, 방광
+                    혹은 신장결석</p>
+                </div>
+      
+              </div>
+              
+            </div>
+          </div>
+      
+          <!-- section 2  -->
+          <div style="margin-top:10px;width:77%;">
+            <div style="border-bottom:3px solid #b51e23;margin:0px;padding:0px;">
+              <p style="background-color: #b51e23;width:3.8%;color: #fff;text-align: center;font-family:NanumSquare;font-weight:800;margin:0px;padding:0px;font-size:15px;">ㅂ</p>
+            </div>
+      
+            <div>
+              <!-- row 1 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">바센지</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">이형성관절염, 슬개골탈구, 염증성 장질환, 백내장, 진행성 망막 위축증, 제3안검샘 탈출증, 간질,
+                    갑상선기능저하증, 혈관성 혈우병, 방광 혹은 신장결석, 판코니 증후군, 배꼽탈장</p>
+                </div>
+      
+              </div>
+              <!-- row 2 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">바셋 하운드</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">혈관육종, 위팽만과 회전증, 이형성관절염, 박리성 골연골염, 슬개골탈구, 유산구성 골염증, 반척추증,
+                    척추간판 질환, 백내장, 녹내장, 제3안검샘 탈출증, 경축성 척수증, 아토피, 확장성 심근병증, 부신기능저하증,
+                    혈관성 혈우병, 방광 혹은 신장결석</p>
+                </div>
+      
+              </div>
+              <!-- row 3 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">버니즈 마운틴 독</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">혈관육종, 림프종, 위팽만과 회전증, 이형성관절염, 박리성 골연골염, 관절염, 유산구성 골염증, 퇴행성
+                    척수장애, 백내장, 안검내반증, 간질, 아토피, 부신기능저하증, 간문맥 전신단락증, 혈관성 혈우병, H용혈성
+                    빈혈과 혈소판 감소 증후근, 사구체신염</p>
+                </div>
+      
+              </div>
+              <!-- row 4 -->
+              <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">벨지안 터뷰렌</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-37px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">위팽만과 회전증, 이형성관절염, 백내장, 진행성 망막 위축증, 간질, 아토피, 갑상성기능저하증</p>
+                </div>
+      
+              </div>
+               <!-- row 5 -->
+               <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">보더콜리</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">이형성관절염, 박리성 골연골염, 백내장, 진행성 망막 위축증, 간질, 신경세라이드지질포스피신증, 동맥관
+                    개원증, 갑상선 기능저하증, 간문맥 전신단락증</p>
+                </div>
+      
+              </div>
+              <!-- row 6 -->
+                <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                  <div class="col-xs-4" style="margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">보더 테리어</p>
+                  </div>
+                  <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">이형성관절염, 슬개골탈구, 골관절 질환, 백내장, 진행성 망막 위축증, 간질, 아토피, 심장판막 질환, 갑상선
+                      기능저하증, 당뇨병, 혈관성 혈우병, 판코니 증후군, 상물림(하물림)</p>
+                  </div>
+        
+                </div>
+              <!-- row 7 -->
+               <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">보르조이</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">마취 위험, 골육종, 위팽만과 회전증, 이형성관절염, 박리성 골연골염, 슬개골탈구, 유산구성 골염증, 백내장,
+                    경축성 척수증, 확장성 심근병증, 갑상성기능저하증, 혈관성 혈우병</p>
+                </div>
+      
+              </div>
+              <!-- row 8 -->
+                <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                  <div class="col-xs-4" style="margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">보스턴 테리어</p>
+                  </div>
+                  <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">이형성관절염, 슬개골탈구, 반척추증, 골관절 질환, 백내장, 녹내장, 건조각막결막염, 청각상실, 간질, 아토피,
+                      심장판막 질환, 편두통성 증후군, 부신과다기능증</p>
+                  </div>
+        
+                </div>
+              <!-- row 9 -->
+               <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">복서</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">혈관육종, 림프종, 비만세포 종양, 위팽만과 회전증, 퇴행성 척수장애, 염증성 장질환, 간질, 확장성 심근병증,
+                    편두통성 증후군, 갑상선 기능저하증, 부신과다기능증, 혈관성 혈우병</p>
+                </div>
+      
+              </div>
+              <!-- row 10 -->
+                <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                  <div class="col-xs-4" style="margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">불마스티프</p>
+                  </div>
+                  <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">혈관육종, 림프종, 비만세포 종양, 위팽만과 회전증, 이형성관절염, 박리성 골연골염, 유산구성 골염증,
+                      백내장, 녹내장, 안검내반증, 경축성 척수증, 아토피, 확장성 심근병증, 방광 혹은 신장결석</p>
+                  </div>
+        
+                </div>
+              <!-- row 11 -->
+               <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">불테리어</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">림프종, 박리성 골연골염, 슬개골탈구, 백내장, 안검내반증, 건조각막결막염, 제3안검샘 탈출증, 청각상실,
+                    아토피, 심장판막 질환, 사구체신염</p>
+                </div>
+      
+              </div>
+              <!-- row 12 -->
+                <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                  <div class="col-xs-4" style="margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">브리타니</p>
+                  </div>
+                  <div class="col-xs-4" style="margin-top:0px;margin-left:140px;margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">이형성관절염, 백내장, 간질, 갑상선기능저하증</p>
+                  </div>
+        
+                </div>
+              <!-- row 13 -->
+               <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">블러드 하운드</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">림프종, 비만세포 종양, 골육종, 위팽만과 회전증, 이형성관절염, 슬개골탈구, 퇴행성 척수장애, 백내장,
+                    안검내반증, 건조각막결막염, 간질, 갑상선 기능저하증, 상물림(하물림)</p>
+                </div>
+      
+              </div>
+              <!-- row 14 -->
+                <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                  <div class="col-xs-4" style="margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">비글</p>
+                  </div>
+                  <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">이형성관절염, 척추간판 질환, 백내장, 녹내장, 이중모화증, 경축성 척수증, 간질, 아토피, 부신과다기능증,
+                      당뇨병, 혈우병, 방광 혹은 신장결석</p>
+                  </div>
+        
+                </div>
+              <!-- row 15 -->
+               <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                <div class="col-xs-4" style="margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">비숑 프리제</p>
+                </div>
+                <div class="col-xs-4" style="margin-top:0px;margin-left:120px;margin-bottom:-21px;">
+                  <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">이형성관절염, 백내장, 슬개골 탈구</p>
+                </div>
+      
+              </div>
+      
+              <!-- row 16 -->
+                <div class="row" style="border-bottom:1px solid #cbcbcb;margin:0px;padding:0px;">
+                  <div class="col-xs-4" style="margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:800;font-size:16px;padding:10px 0px;">비즐라</p>
+                  </div>
+                  <div class="col-xs-4" style="margin-top:-47px;margin-left:200px;margin-bottom:-21px;">
+                    <p style="color: #000;text-align:left;font-family:NanumSquare;font-weight:500;font-size:11px;padding:10px 15px;letter-spacing:0px;">혈관육종, 림프종, 비만세포 종양, 이형성관절염, 관절염, 슬개골탈구, 백내장, 녹내장, 이중모화증,
+                      안검내반증, 간질, 아토피, 혈관성 혈우병, 용혈성 빈혈과 혈소판 감소 증후근</p>
+                  </div>
+        
+                </div>
+            </div>
+          </div>
+          
         </div>
-        <!-- Table Section -->
-        <div class="table-section" >
-            <div class="hr1"></div>
-            <table border="1">
-                <tr>
-                    <th>Category</th>
-                    <th>Value</th>
-                </tr>
-                {% for item in data %}
-                <tr>
-                    <td>{{ item['category'] }}</td>
-                    <td>{{ item['value'] }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <div class="hr2"></div>
-        </div>
-    </div>
 </body>
 </html>

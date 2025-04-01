@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+    <!-- <link rel="stylesheet" href="http://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> -->
+    <link rel="stylesheet" href="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/CSS/nanumsquare.css">
+    <link rel="stylesheet" href="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/CSS/bootstrap.min.css">
     <title>Pet's Code Plus</title>
     <style>
         @page {
@@ -17,7 +19,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-         }
+        }
         .report-container { width: 80%; margin: auto; }
         .background-image {
             position: absolute;
@@ -147,16 +149,13 @@
 </head>
 <body>
     <img src="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/POCs/fastapi_pdf_report_generation/static/page2_img.png" alt="Background Image" class="background-image">
-    <div class="report-container">
-        <div class="header" style="border-top: 3px solid #b51e23;z-index: 1;">
-            <!-- <div class="page-number">01 page</div> -->
-            <hr>
-            <h1>Pet’s Code Plus</h1>
-            <h2>혈통분석 + 유전질환검사</h2>
-            <div class="sub-header">CELLBIODX
-    
-            </div>
+    <div class="container">
+        <div class="header" style="z-index:1;">
+            <!-- <div class="page-number">07 page</div> -->
+            <p style="margin-left:55px;letter-spacing:-0.5px;">CellBioDX Pet’s Code Plus</p>
+            <!-- <div class="subheader"><span style="font-size:41px;font-family:NanumSquare;letter-spacing:-1.2px;font-weight:800;">02</span> 유전 질환 검사 설명</div> -->
         </div>
+
         <!-- Table Section -->
         <div class="table-section" >
             <div class="hr1"></div>
@@ -167,8 +166,8 @@
                 </tr>
                 {% for item in data %}
                 <tr>
-                    <td>{{ item['category'] }}</td>
-                    <td>{{ item['value'] }}</td>
+                    <td class="label">{{ item['category'] }}</td>
+                    <td class="label">{{ item['value'] }}</td>
                 </tr>
                 {% endfor %}
             </table>
