@@ -6,7 +6,7 @@ from starlette.responses import FileResponse
 
 # from app.helper.utils import compress_pdf
 from app.worker import celery_app
-from app.tasks import generate_pdf_task
+from app.tasks import generate_one_pdf_task, generate_pdf_task
 
 
 route = APIRouter() 
@@ -31,14 +31,18 @@ async def create_report(file: UploadFile = File(...)):
         # return {"message": "Report generation started", "task_id": task.id}
         
         start_time = time.time()
-        output = generate_pdf_task(file_path, output_pdf)
+
+        # output = generate_pdf_task(file_path, output_pdf)
+        output = generate_one_pdf_task(file_path, output_pdf)
+
         print(output)
         # compress_pdf(output)
+
         end_time = time.time()
         total_time: float = end_time-start_time
         print(f"Total time taken : {total_time: .2f}")
 
-        return {"message": "Report generated successfully.", "total_time": {total_time}}
+        return {"message": "Report generated successfully.", "total_time": f"{total_time: .2f}sec."}
     except Exception as e:
         return {"Exception details": f"{e}"}
 

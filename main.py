@@ -1,30 +1,13 @@
 import os
 from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
-# from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from sqlalchemy.orm import Session
-# from contextlib import asynccontextmanager
 from typing import Annotated
 
 from app.database import SessionLocal, engine
 import app.models as base_models
 from app.routes.pdf_route import route as pdf_routes
 
-
-
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     # scheduler = AsyncIOScheduler(timezone=f'{your_timezone}')
-#     # repeat task every 10 seconds
-#     # scheduler.add_job(func=repeat_task, trigger='interval', seconds=10)
-#     # scheduler.start()
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
-
-# app = FastAPI(lifespan=lifespan)
 
 
 def get_db():
@@ -41,7 +24,7 @@ app = FastAPI(
 )
 
 
-# models.metadata.create_all(bind=engine)
+
 base_models.metadata.create_all(bind=engine)
 
 

@@ -5,12 +5,7 @@ from fastapi import File
 # from PyPDF2 import PdfReader, PdfWriter
 
 
-def compress_image_pillow(input_path, output_path, quality=85):
-    '''# Compress Using - Pillow'''
-    with Image.open(input_path) as img:
-        # img.save(output_path, "JPEG", quality=quality) # For JPG Images
-        img.save(output_path, "PNG", optimize=True) # For PNG Images
-    return img
+
 
 
 # def compress_pdf(input_path):

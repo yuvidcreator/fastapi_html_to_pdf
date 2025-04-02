@@ -34,43 +34,44 @@ def generate_pdf_task(file_path, output_filename):
     data = df.to_dict(orient="records")
     print(data)
 
-    ''' 
-    # templates = select_templates(data)  # Dynamically select templates
-    # pdf_pages = []
+    templates = select_templates(data)  # Dynamically select templates
+    pdf_pages = []
 
-    # for template_name in templates:
-    #     template = jinja_env.get_template(template_name)
-    #     html_content = template.render(data=data)
+    for template_name in templates:
+        template = jinja_env.get_template(template_name)
+        html_content = template.render(data=data)
 
-    #     # Convert HTML to PDF page
-    #     pdf_page = HTML(string=html_content, base_url="").write_pdf()
-    #     # pdf_page = HTML(string=html_content, base_url=html_content.build_absolute_uri()).write_pdf()
-    #     # pdf_page = HTML(string=html_content, base_url=self.request.build_absolute_uri()).write_pdf()
-    #     pdf_pages.append(pdf_page)
-    '''
+        # Convert HTML to PDF page
+        pdf_page = HTML(string=html_content, base_url="").write_pdf()
+        # pdf_page = HTML(string=html_content, base_url=html_content.build_absolute_uri()).write_pdf()
+        # pdf_page = HTML(string=html_content, base_url=self.request.build_absolute_uri()).write_pdf()
+        pdf_pages.append(pdf_page)
+
+    # Merge PDFs
+    final_pdf = b"".join(pdf_pages)
+
+    with open(output_filename, "wb") as f:
+        f.write(final_pdf)
+
+    os.remove(file_path)
+    return output_filename
+
+
+
+
+def generate_one_pdf_task(file_path, output_filename):
+    df = pd.read_excel(file_path)
+    data = df.to_dict(orient="records")
+    print(data)
 
     template_1 = jinja_env.get_template(f"report1.html")
-    # # # template_2 = jinja_env.get_template(f"report_2.html")
-    # # template_3 = jinja_env.get_template(f"report_3.html")
     html_content1 = template_1.render(data=data)
-    # # # html_content2 = template_2.render(data=data)
-    # # html_content3 = template_3.render()
 
     # # # Convert HTML to PDF page
     pdf_page_1 = HTML(string=html_content1, base_url="").write_pdf()
-    # # # pdf_page_2 = HTML(string=html_content2, base_url="").write_pdf()
-    # # pdf_page_3 = HTML(string=html_content3, base_url="").write_pdf()
-
-    # # pdf_pages = [pdf_page_1, pdf_page_3]
-
-
-    # Merge PDFs
-    # final_pdf = b"".join(pdf_page)
-    # final_pdf = b"".join(pdf_pages)
 
     with open(output_filename, "wb") as f:
         f.write(pdf_page_1)
-        # f.write(pdf_page_1)
 
     os.remove(file_path)
     return output_filename
