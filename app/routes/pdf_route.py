@@ -1,6 +1,7 @@
 import os
 import time
 import shutil
+from functools import lru_cache
 from fastapi import UploadFile, File, APIRouter
 from starlette.responses import FileResponse
 
@@ -15,6 +16,7 @@ route = APIRouter()
 
 
 # Upload XLSX & generate PDF
+# @lru_cache(maxsize=128)
 @route.post("/upload-file/")
 async def create_report(file: UploadFile = File(...)):
     file_path = f"temp/{file.filename}"
@@ -35,7 +37,7 @@ async def create_report(file: UploadFile = File(...)):
         # output = generate_pdf_task(file_path, output_pdf)
         output = generate_one_pdf_task(file_path, output_pdf)
 
-        print(output)
+        # print(generate_one_pdf_task.cache_info())
         # compress_pdf(output)
 
         end_time = time.time()

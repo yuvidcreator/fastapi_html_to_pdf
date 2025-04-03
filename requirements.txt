@@ -9,6 +9,8 @@ python-dotenv
 cryptography
 pandas
 openpyxl
+matplotlib
+orjson
 python-multipart
 weasyprint
 pypdf

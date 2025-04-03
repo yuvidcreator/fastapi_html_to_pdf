@@ -2,6 +2,9 @@ import os
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
+from functools import lru_cache
+
+from app.helper.graph_generator import generate_doughnut_chart
 # from app.worker import celery_app
 
 
@@ -59,19 +62,27 @@ def generate_pdf_task(file_path, output_filename):
 
 
 
+
+@lru_cache(maxsize=128)
 def generate_one_pdf_task(file_path, output_filename):
     df = pd.read_excel(file_path)
     data = df.to_dict(orient="records")
-    print(data)
+    # print("@PDF_Gen ---> ", data)
 
-    template_1 = jinja_env.get_template(f"report1.html")
-    html_content1 = template_1.render(data=data)
+    try:
+        # Generate doughnut chart
+        chart_path = generate_doughnut_chart(data)
+        
+        template_1 = jinja_env.get_template(f"report1.html")
+        html_content1 = template_1.render(data=data)
 
-    # # # Convert HTML to PDF page
-    pdf_page_1 = HTML(string=html_content1, base_url="").write_pdf()
+        # # # Convert HTML to PDF page
+        pdf_page_1 = HTML(string=html_content1, base_url="").write_pdf()
 
-    with open(output_filename, "wb") as f:
-        f.write(pdf_page_1)
+        with open(output_filename, "wb") as f:
+            f.write(pdf_page_1)
 
-    os.remove(file_path)
-    return output_filename
+        os.remove(file_path)
+        return output_filename
+    except Exception as e:
+        print(f"{e}")
