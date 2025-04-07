@@ -87,4 +87,4 @@ class ConvertImageToWebp:
 
 img_obj = ConvertImageToWebp()
 
-img = img_obj.convert_to_webp(input_image_path="static/Group_33918.png")
+img = img_obj.convert_to_webp(input_image_path="/Users/MGBiMACmini_0002/Desktop/Yuvraaj/AiGenomics_Projects/cellbiodx_dog_breed_analysis/html_files/donut_chart.png")
